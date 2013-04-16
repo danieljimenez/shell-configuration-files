@@ -1,0 +1,6 @@
+ssh/known_hosts
+ssh/*_rsa
+ssh/*_rsa.pub
+ssh/*.pem
+ssh/devops_rsa
+secrets

@@ -1,0 +1,39 @@
+[user]
+	name = Daniel Jimenez
+	email = daniel.j.jimenez@gmail.com
+[merge]
+	tool = opendiff
+[core]
+	excludesfile = /Users/djimenez/.gitignore_global
+	quotepath = false
+	autocrlf = input
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[mergetool]
+	keepBackup = false
+[push]
+	default = current
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[alias]
+	s = status
+	a = add
+	co = checkout
+	b = branch
+	c = commit
+	l = log
+	nuke = !git clean -Xdf && git reset --hard
+[apply]
+	whitespace = nowarn
+[rebase]
+	autostash = true

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+#
+# Run this by calling ".personalconfigs/setup.sh"
+# of course you don't have to call the directory 
+# .personalconfigs should you wish to change it.
+#
+
+# All the fun init stuff you have to do in Bash! Yay!
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+scriptdir="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+
+# Create the symbolic links (essentially this is the setup)
+ln -svhf $scriptdir/ssh ~/.ssh
+ln -svhf $scriptdir/inputrc ~/.inputrc
+ln -svhf $scriptdir/hgrc ~/.hgrc
+ln -svhf $scriptdir/bash_profile ~/.bash_profile
+ln -svhf $scriptdir/uncrustify-objc ~/.uncrustify-objc
+ln -svhf $scriptdir/gitconfig ~/.gitconfig
+ln -svhf $scriptdir/gitignore_global ~/.gitignore_global
+
+# Setup link to secrets file if you have one
+[ -f $scriptdir/secrets ] && ln -svhf $scriptdir/secrets ~/.secrets
+
+# Consume ssh host keys from your known hosts list if you have one.
+[ -f $scriptdir/ssh/known_hosts_list ] && ssh-keyscan -t rsa,dsa -f $scriptdir/ssh/known_hosts_list > ~/.ssh/known_hosts

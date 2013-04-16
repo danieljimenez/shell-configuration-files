@@ -1,0 +1,12 @@
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set mark-directories on
+set mark-symlinked-directories on
+set expand-tilde on
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+$if Bash
+  Space: magic-space
+$endif
+set visible-stats on
