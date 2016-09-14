@@ -110,7 +110,7 @@ if [ `uname` = 'Darwin' ]; then
 		alias gco='git checkout'
 		__git_complete gco _git_checkout
 		
-		alias gsu='git submodule update'
+		alias gsu='git submodule update --init'
 		__git_complete gsu _git_submodule update
 		
 		alias gt='cd $(git rev-parse --show-toplevel)'
