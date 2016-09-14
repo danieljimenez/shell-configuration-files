@@ -12,18 +12,20 @@ Host bitbucket.org
 	ForwardAgent no
 	UseRoaming no
 
-Host *.local
-	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
-	ForwardAgent yes
-	UserKnownHostsFile /dev/null
-	StrictHostKeyChecking no
-	
-# AWS
-Host * *.amazonaws.com
-	User ec2-user
+# Misc Servers
+Host devops
+	User fore
+
+Host i-* *.amazonaws.com
+  User ec2-user
+
+# Default aka *
+Host *
+  User ec2-user
 	StrictHostKeyChecking no
 	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
 	ForwardAgent yes
 	LogLevel ERROR
 	UseRoaming no
 	UserKnownHostsFile /dev/null
+
