@@ -2,15 +2,12 @@
 Host github.com
 	User git
 	ForwardAgent no
-	UseRoaming no
 Host gist.github.com
 	User git
 	ForwardAgent no
-	UseRoaming no
 Host bitbucket.org
 	User git
 	ForwardAgent no
-	UseRoaming no
 
 # Misc Servers
 Host devops
@@ -26,6 +23,5 @@ Host *
 	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
 	ForwardAgent yes
 	LogLevel ERROR
-	UseRoaming no
 	UserKnownHostsFile /dev/null
 
