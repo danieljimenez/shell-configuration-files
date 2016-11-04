@@ -12,6 +12,9 @@ Host bitbucket.org
 # Misc Servers
 Host devops
 	User fore
+Host build-agent-*
+	User foreflight
+
 
 Host i-* *.amazonaws.com
   User ec2-user
@@ -23,5 +26,5 @@ Host *
 	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
 	ForwardAgent yes
 	LogLevel ERROR
-	UserKnownHostsFile /dev/null
-
+	# UserKnownHostsFile /dev/null
+	KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521

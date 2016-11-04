@@ -29,4 +29,4 @@ ln -svhf $scriptdir/gitignore_global ~/.gitignore_global
 [ -f $scriptdir/secrets ] && ln -svhf $scriptdir/secrets ~/.secrets
 
 # Consume ssh host keys from your known hosts list if you have one.
-[ -f $scriptdir/ssh/known_hosts_list ] && ssh-keyscan -t rsa,dsa -f $scriptdir/ssh/known_hosts_list > ~/.ssh/known_hosts
+[ -f $scriptdir/ssh/known_hosts_list ] && ssh-keyscan -t rsa,dsa,ecdsa,ed25519 -f $scriptdir/ssh/known_hosts_list > ~/.ssh/known_hosts

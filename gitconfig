@@ -37,3 +37,9 @@
 	whitespace = nowarn
 [rebase]
 	autostash = true
+[diff]
+    tool = opendiff
+[difftool]
+    prompt = false
+[difftool "opendiff"]
+    cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
