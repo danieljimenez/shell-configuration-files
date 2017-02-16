@@ -1,5 +1,4 @@
 # .bash_profile
-# An interactive login shell (ie opening Terminal.app when on your mac)
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -14,39 +13,27 @@ if [ -f ~/.secrets ]; then
 	source ~/.secrets
 fi
 
-if [ `uname` = 'Linux' ]; then
-	alias l.='ls -ld --color .*'
-	alias ll='/bin/ls -lshG --color'
-	alias ls='/bin/ls --color'
-elif [ `uname` = 'Darwin' ]; then
-	alias l.='ls -lGd .*'
-	alias ll='/bin/ls -lshG'
+uname=$(uname)
+
+if [ $uname == 'Darwin' ]; then
+	alias l.='/bin/ls -Glsha'
+	alias ll='/bin/ls -Glsh'
 	alias ls='/bin/ls -G'
 	alias updatedb='/usr/libexec/locate.updatedb'
 	alias xed='/usr/bin/xed -xc'
 	alias rmate='/usr/local/bin/mate'
 	alias notify='/usr/bin/osascript -e "display notification \"${*}\" sound name \"Blow\""'
-	reveal () { open -R "$*"; }
+	gt() { /usr/local/bin/gittower ${1:-.}; }
+	reveal() { open -R "${*:-.}"; }
+elif [ $uname == 'Linux'	]; then
+	alias l.='ls -ld --color'
+	alias ll='/bin/ls -lshG --color'
+	alias ls='/bin/ls --color'
 fi
 
 if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
 	source /usr/local/bin/virtualenvwrapper_lazy.sh
 fi
-
-# if [ -f /usr/local/bin/docker-machine ]; then
-# 	eval "$(docker-machine env default)"
-# fi
-
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-	source "$HOME/.rvm/scripts/rvm"
-fi
-
-##############Chef Aliases##################
-alias berks='bundle exec berks'
-alias chef='bundle exec chef'
-alias knife='bundle exec knife'
-alias kitchen='bundle exec kitchen'
-alias ks='bundle exec knife status'
 
 ##############Environment Variables##################
 export PATH=~/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -66,23 +53,38 @@ else
 	export JAVA_HOME='/usr/lib/jvm/jre'
 fi
 
-if [ `uname` = 'Darwin' ]; then
-	if [ -f $(brew --prefix)/etc/bash_completion ]; then
-		source $(brew --prefix)/etc/bash_completion
-	fi
-fi
+##############Chef Aliases##################
+alias berks='bundle exec berks'
+alias chef='bundle exec chef'
+alias knife='bundle exec knife'
+alias kitchen='bundle exec kitchen'
+alias ks='bundle exec knife status'
 
-if [ `uname` = 'Darwin' ]; then	
+##############Command Completion##################
+
+# Large impact on shell open time.
+# 
+# if [ `uname` = 'Darwin' ]; then
+#		if [ -f $(brew --prefix)/etc/bash_completion ]; then
+#			source $(brew --prefix)/etc/bash_completion
+#		fi
+# fi
+
+if [ $uname == 'Darwin' ]; then
 	if [ -f $(brew --prefix)/bin/aws_completer ]; then
 		complete -C $(brew --prefix)/bin/aws_completer aws
 	fi
+	
+	if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
+		source "$HOME/.rvm/scripts/rvm"
+	fi
 fi
 
-
-##############Command Completion##################
-if [ `uname` = 'Darwin' ]; then	
+if [ $uname == 'Darwin' ]; then 
 	if [ -f `xcode-select -p`/usr/share/git-core/git-completion.bash ]; then
 		source `xcode-select -p`/usr/share/git-core/git-completion.bash
+		
+		# These are command completion mappings for the above aliases.
 		alias g='git'
 		__git_complete g __git_main
 		
@@ -110,10 +112,11 @@ if [ `uname` = 'Darwin' ]; then
 		alias gco='git checkout'
 		__git_complete gco _git_checkout
 		
-		alias gsu='git submodule update --init'
+		alias gsu='git submodule update --init --recursive'
 		__git_complete gsu _git_submodule update
 		
-		alias gt='cd $(git rev-parse --show-toplevel)'
+		# Sneak to the top of the git repo
+		alias 'gtl'='cd $(git rev-parse --show-toplevel)'
 		
 		#These don't work bc of an off by one error in the git-complete code
 		# alias gpush='git pull'

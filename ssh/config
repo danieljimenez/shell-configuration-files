@@ -8,20 +8,23 @@ Host gist.github.com
 Host bitbucket.org
 	User git
 	ForwardAgent no
+Host git-codecommit.*.amazonaws.com
+	User APKAI25OV6N2BJOWKWXQ
+	ForwardAgent no
 
 # Misc Servers
 Host devops
 	User fore
 Host build-agent-*
 	User foreflight
-
+	ForwardAgent yes
 
 Host i-* *.amazonaws.com
   User ec2-user
 
 # Default aka *
 Host *
-  User ec2-user
+	User ec2-user
 	StrictHostKeyChecking no
 	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
 	ForwardAgent yes
