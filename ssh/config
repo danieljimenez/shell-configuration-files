@@ -1,3 +1,5 @@
+IdentityFile ~/.ssh/djimenez.pem
+
 # VCS repos	
 Host github.com
 	User git
@@ -12,22 +14,37 @@ Host git-codecommit.*.amazonaws.com
 	User APKAI25OV6N2BJOWKWXQ
 	ForwardAgent no
 
+Host vpn-prod ffaus-fw ffhou-fw ffaus-switch ffhou-switch ffpwm-fw ffpwm-switch testasa testasa2 34.201.254.81
+    User foreflight
+    StrictHostKeyChecking no
+    KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521
+
+Host ip-* i-* *.amazonaws.com *.aws.foreflight.io skylab-* qa-* prod-* apollo-* build-agent-linux 172.24.*.* 172.25.*.* 172.26.*.* 172.27.*.* 
+	User ec2-user
+	StrictHostKeyChecking no
+	UserKnownHostsFile /dev/null
+	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
+	# ProxyCommand ssh -q devops nc -X connect %h %p
+
+Host chip.local
+    User chip
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    RemoteForward 127.0.0.1:52698 127.0.0.1:52698
+		
 # Misc Servers
 Host devops
 	User fore
+    RemoteForward 127.0.0.1:52698 127.0.0.1:52698
+
 Host build-agent-*
 	User foreflight
 	ForwardAgent yes
 
-Host i-* *.amazonaws.com
-  User ec2-user
-
-# Default aka *
 Host *
 	User ec2-user
 	StrictHostKeyChecking no
 	RemoteForward 127.0.0.1:52698 127.0.0.1:52698
 	ForwardAgent yes
+	UserKnownHostsFile /dev/null
 	LogLevel ERROR
-	# UserKnownHostsFile /dev/null
-	KexAlgorithms diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1,diffie-hellman-group-exchange-sha256,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521

@@ -11,7 +11,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [mergetool]
 	keepBackup = false
@@ -32,14 +32,21 @@
 	b = branch
 	c = commit
 	l = log
+  sf = submodule foreach
 	nuke = !git clean -Xdf && git reset --hard
+  prune-branches = !"git branch --merged | grep -v '>' | grep -v master | grep -v develop | xargs -L1  | xargs git branch --verbose -D"
+	#prune-branches-remote = !"git fetch && git branch --remote --merged | grep origin | grep -v '>' | grep -v master | grep -v develop | grep -v release | xargs -L1 | cut -d"/" -f2- | xargs git push origin --verbose --delete --dry-run"
 [apply]
 	whitespace = nowarn
 [rebase]
 	autostash = true
 [diff]
-    tool = opendiff
+  tool = opendiff
 [difftool]
-    prompt = false
+  prompt = false
 [difftool "opendiff"]
-    cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
+  cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
+[credential]
+	helper = osxkeychain
+[commit]
+	template = /Users/djimenez/.stCommitMsg

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # .bash_profile
 
 # Source global definitions
@@ -23,8 +24,9 @@ if [ $uname == 'Darwin' ]; then
 	alias xed='/usr/bin/xed -xc'
 	alias rmate='/usr/local/bin/mate'
 	alias notify='/usr/bin/osascript -e "display notification \"${*}\" sound name \"Blow\""'
-	gt() { /usr/local/bin/gittower ${1:-.}; }
+	alias gtl='cd $(git rev-parse --show-toplevel)' 	# Sneak to the top of the git repo
 	reveal() { open -R "${*:-.}"; }
+  genpass() { curl -SsL http://www.dinopass.com/password/strong && echo ''; }
 elif [ $uname == 'Linux'	]; then
 	alias l.='ls -ld --color'
 	alias ll='/bin/ls -lshG --color'
@@ -41,19 +43,31 @@ export MANPATH=/opt/local/share/man:$MANPATH
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="df:free:man:ls:ll:l.:reveal:gs:gl:open"
 export HISTSIZE=75000
-export FIGNORE=".DS_Store:.git/" #files to ignore with tab completion
+export FIGNORE=".DS_Store:.git/" # files to ignore with tab completion
+export GOPATH="${HOME}/src/golang" # go workspace
 
-if [ -f '/usr/local/bin/mate_wait' ]; then
-	export EDITOR='/usr/local/bin/mate_wait'
+if [ -f '/usr/local/bin/mate' ]; then
+	export EDITOR='/usr/local/bin/mate -w'
 fi
 
 if [ -f /usr/libexec/java_home ]; then
-	export JAVA_HOME=`/usr/libexec/java_home`
+	export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 else 
 	export JAVA_HOME='/usr/lib/jvm/jre'
 fi
 
-##############Chef Aliases##################
+if [ -f /usr/local/bin/docker ]; then
+  drm() { docker rm $(docker ps -a -q); }
+  dri() { docker rmi $(docker images -q); }
+  dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+fi
+
+
+##############AWS Aliases#########################
+
+
+
+##############Chef Aliases########################
 alias berks='bundle exec berks'
 alias chef='bundle exec chef'
 alias knife='bundle exec knife'
@@ -71,18 +85,20 @@ alias ks='bundle exec knife status'
 # fi
 
 if [ $uname == 'Darwin' ]; then
-	if [ -f $(brew --prefix)/bin/aws_completer ]; then
-		complete -C $(brew --prefix)/bin/aws_completer aws
+	if [ -f "$(which brew)" ]; then
+		if [ -f $(brew --prefix)/bin/aws_completer ]; then
+			complete -C $(brew --prefix)/bin/aws_completer aws
+		fi
 	fi
 	
-	if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
-		source "$HOME/.rvm/scripts/rvm"
-	fi
+  if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
+    source "$HOME/.rvm/scripts/rvm"
+  fi
 fi
 
 if [ $uname == 'Darwin' ]; then 
-	if [ -f `xcode-select -p`/usr/share/git-core/git-completion.bash ]; then
-		source `xcode-select -p`/usr/share/git-core/git-completion.bash
+	if [ -f "$(xcode-select -p)/usr/share/git-core/git-completion.bash" ]; then
+		source "$(xcode-select -p)/usr/share/git-core/git-completion.bash"
 		
 		# These are command completion mappings for the above aliases.
 		alias g='git'
@@ -106,7 +122,7 @@ if [ $uname == 'Darwin' ]; then
 		alias gr='git reset'
 		__git_complete gr _git_reset
 
-		alias gf='git fetch --prune'
+		alias gf='git fetch --prune --all'
 		__git_complete gf _git_fetch
 		
 		alias gco='git checkout'
@@ -114,9 +130,9 @@ if [ $uname == 'Darwin' ]; then
 		
 		alias gsu='git submodule update --init --recursive'
 		__git_complete gsu _git_submodule update
-		
-		# Sneak to the top of the git repo
-		alias 'gtl'='cd $(git rev-parse --show-toplevel)'
+    
+		alias gsf='git submodule foreach --recursive'
+		__git_complete gsu _git_submodule foreach
 		
 		#These don't work bc of an off by one error in the git-complete code
 		# alias gpush='git pull'
@@ -129,8 +145,8 @@ if [ $uname == 'Darwin' ]; then
 	fi
 
 	# git prompt additions
-	if [ -f `xcode-select -p`/usr/share/git-core/git-prompt.sh ]; then
-		source `xcode-select -p`/usr/share/git-core/git-prompt.sh
+	if [ -f "$(xcode-select -p)/usr/share/git-core/git-prompt.sh" ]; then
+		source "$(xcode-select -p)/usr/share/git-core/git-prompt.sh"
 		export GIT_PS1_SHOWSTASHSTATE=true
 		export GIT_PS1_SHOWDIRTYSTATE=true
 		export GIT_PS1_SHOWCOLORHINTS=true
