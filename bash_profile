@@ -20,10 +20,9 @@ if [ $uname == 'Darwin' ]; then
     alias l.='/bin/ls -Glsha'
     alias ll='/bin/ls -Glsh'
     alias ls='/bin/ls -G'
-    alias updatedb='/usr/libexec/locate.updatedb'
+    alias tf='terraform'
     alias xed='/usr/bin/xed -xc'
     alias rmate='/usr/local/bin/mate'
-    alias notify='/usr/bin/osascript -e "display notification \"${*}\" sound name \"Blow\""'
     alias hb='hub browse'
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
     reveal() { open -R "${*:-.}"; }
@@ -57,6 +56,10 @@ if [ -f /usr/local/bin/mate ]; then
     export EDITOR='/usr/local/bin/mate -w'
 fi
 
+if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then
+    source '/usr/local/google-cloud-sdk/path.bash.inc'
+fi
+
 if [ -f /usr/libexec/java_home ]; then
     export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 else 
@@ -69,7 +72,6 @@ if [ -f /usr/local/bin/docker ]; then
   dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 fi
 
-
 ##############Command Completion##################
 if [ $uname == 'Darwin' ]; then
     XCODE_PATH=$(xcode-select -p)
@@ -80,6 +82,11 @@ if [ $uname == 'Darwin' ]; then
         if [ -f ${BREW_PATH}/bin/aws_completer ]; then
             complete -C ${BREW_PATH}/bin/aws_completer aws
         fi
+    fi
+
+    # GCloud
+    if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then
+        source '/usr/local/google-cloud-sdk/completion.bash.inc'
     fi
 
     # RVM

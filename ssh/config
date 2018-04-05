@@ -16,7 +16,6 @@ Host bitbucket.org
     Port 22
     ForwardAgent no
     StrictHostKeyChecking yes
-
 Host git.*
     User git
     Port 22
@@ -27,7 +26,6 @@ Host gist.git.*
     Port 22
     ForwardAgent no
     StrictHostKeyChecking yes
-
 
 Host chip.local
     User chip
