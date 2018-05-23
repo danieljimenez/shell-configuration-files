@@ -24,6 +24,7 @@ if [ $uname == 'Darwin' ]; then
     alias xed='/usr/bin/xed -xc'
     alias rmate='/usr/local/bin/mate'
     alias hb='hub browse'
+    alias gt='gittower'
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
     reveal() { open -R "${*:-.}"; }
     genpass() { curl -SsL http://www.dinopass.com/password/strong && echo ''; }
