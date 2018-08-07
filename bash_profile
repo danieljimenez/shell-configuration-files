@@ -27,8 +27,9 @@ if [ $uname == 'Darwin' ]; then
     alias gt='gittower'
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
     reveal() { open -R "${*:-.}"; }
-    genpass() { curl -SsL http://www.dinopass.com/password/strong && echo ''; }
-elif [ $uname == 'Linux'    ]; then
+    genpass() { curl -SsL http://www.dinopass.com/password && echo ''; }
+    ssh-known-host-delete-line() { sed -i.bak -e "$1d" /Users/djimenez/.ssh/known_hosts; }
+elif [ $uname == 'Linux' ]; then
     alias l.='ls -ld --color'
     alias ll='/bin/ls -lshG --color'
     alias ls='/bin/ls --color'
