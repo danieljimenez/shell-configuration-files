@@ -150,14 +150,15 @@ if [ $uname == 'Darwin' ]; then
         alias gs='git status --branch'
     fi
     
-    # git prompt additions
-    if [ -f "$(xcode-select -p)/usr/share/git-core/git-prompt.sh" ]; then
-        source "$(xcode-select -p)/usr/share/git-core/git-prompt.sh"
-        export GIT_PS1_SHOWSTASHSTATE=true
-        export GIT_PS1_SHOWDIRTYSTATE=true
-        export GIT_PS1_SHOWCOLORHINTS=true
-        export GIT_PS1_UNTRACKEDFILES=true
-        PROMPT_COMMAND_NEW='__git_ps1 "\h:\W" " \u$ " "[%s]";'
-        PROMPT_COMMAND="${PROMPT_COMMAND_NEW}${PROMPT_COMMAND}"
-    fi
+    # # git prompt additions
+#     if [ -f "$(xcode-select -p)/usr/share/git-core/git-prompt.sh" ]; then
+#         source "$(xcode-select -p)/usr/share/git-core/git-prompt.sh"
+#         export GIT_PS1_SHOWSTASHSTATE=true
+#         export GIT_PS1_SHOWDIRTYSTATE=true
+#         export GIT_PS1_SHOWCOLORHINTS=true
+#         export GIT_PS1_UNTRACKEDFILES=true
+#         PROMPT_COMMAND_NEW='__git_ps1 "\h:\W" " \u$ " "[%s]";'
+#         PROMPT_COMMAND="${PROMPT_COMMAND_NEW}${PROMPT_COMMAND}"
+#     fi
 fi
+
