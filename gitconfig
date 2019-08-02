@@ -34,7 +34,8 @@
     l = log
     sf = submodule foreach
     nuke = !git clean -Xdf && git reset --hard
-    prune-branches = !"git branch --merged | grep -v '>' | grep -v master | grep -v develop | xargs -L1  | xargs git branch --verbose -D"
+    quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+    prune-branches = !"git branch --merged | grep -v '*' | grep -v master | grep -v develop | xargs -L1  | xargs git branch --verbose -D"
     #prune-branches-remote = !"git fetch && git branch --remote --merged | grep origin | grep -v '>' | grep -v master | grep -v develop | grep -v release | xargs -L1 | cut -d"/" -f2- | xargs git push origin --verbose --delete --dry-run"
 [apply]
     whitespace = nowarn
