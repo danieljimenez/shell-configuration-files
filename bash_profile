@@ -28,7 +28,7 @@ if [ $uname == 'Darwin' ]; then
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
     reveal() { open -R "${*:-.}"; }
     genpass() { curl -SsL http://www.dinopass.com/password && echo ''; }
-    ssh-known-host-delete-line() { sed -i.bak -e "$1d" /Users/djimenez/.ssh/known_hosts; }
+    ssh-known-host-delete-line() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
 elif [ $uname == 'Linux' ]; then
     alias l.='ls -ld --color'
     alias ll='/bin/ls -lshG --color'
@@ -40,7 +40,7 @@ if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
 fi
 
 ##############Environment Variables##################
-export PATH=~/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=${HOME}/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="df:free:man:ls:ll:l.:reveal:gs:gl:open"
@@ -73,6 +73,8 @@ if [ -f /usr/local/bin/docker ]; then
   dri() { docker rmi $(docker images -q); }
   dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 ##############Command Completion##################
 if [ $uname == 'Darwin' ]; then
@@ -141,7 +143,7 @@ if [ $uname == 'Darwin' ]; then
         __git_complete gsu _git_submodule foreach
         
         #These don't work bc of an off by one error in the git-complete code
-        # alias gpush='git pull'
+        # alias gpull='git pull'
         # __git_complete gpull _git_pull
         #
         # alias gpush='git push'
@@ -150,15 +152,5 @@ if [ $uname == 'Darwin' ]; then
         alias gs='git status --branch'
     fi
     
-    # # git prompt additions
-#     if [ -f "$(xcode-select -p)/usr/share/git-core/git-prompt.sh" ]; then
-#         source "$(xcode-select -p)/usr/share/git-core/git-prompt.sh"
-#         export GIT_PS1_SHOWSTASHSTATE=true
-#         export GIT_PS1_SHOWDIRTYSTATE=true
-#         export GIT_PS1_SHOWCOLORHINTS=true
-#         export GIT_PS1_UNTRACKEDFILES=true
-#         PROMPT_COMMAND_NEW='__git_ps1 "\h:\W" " \u$ " "[%s]";'
-#         PROMPT_COMMAND="${PROMPT_COMMAND_NEW}${PROMPT_COMMAND}"
-#     fi
 fi
 
