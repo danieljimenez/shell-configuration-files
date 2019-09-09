@@ -130,6 +130,7 @@ if [ $uname == 'Darwin' ]; then
         alias gr='git reset'
         __git_complete gr _git_reset
 
+        alias gfp='git fetch --prune --all && git pull'
         alias gf='git fetch --prune --all'
         __git_complete gf _git_fetch
         
