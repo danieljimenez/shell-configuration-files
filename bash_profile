@@ -10,6 +10,10 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
+if [ -f ~/.bash_profile_work ]; then
+    source ~/.bash_profile_work
+fi
+
 if [ -f ~/.secrets ]; then
     source ~/.secrets
 fi
@@ -26,6 +30,8 @@ if [ $uname == 'Darwin' ]; then
     alias hb='hub browse'
     alias gt='gittower $(git rev-parse --show-toplevel)'
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
+    alias kg='kubectl get '
+    alias gcli='gcloud cloud-shell ssh --authorize-session'
     reveal() { open -R "${*:-.}"; }
     genpass() { curl -SsL http://www.dinopass.com/password && echo ''; }
     ssh-known-host-delete-line() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
@@ -54,12 +60,12 @@ if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
 
-if [ -f /usr/local/bin/mate ]; then
-    export EDITOR='/usr/local/bin/mate -w'
+if [ -f /usr/local/bin/subl ]; then
+    export EDITOR='/usr/local/bin/subl -w'
 fi
 
-if [ -f '/usr/local/google-cloud-sdk/path.bash.inc' ]; then
-    source '/usr/local/google-cloud-sdk/path.bash.inc'
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then
+    source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 fi
 
 if [ -f /usr/libexec/java_home ]; then
