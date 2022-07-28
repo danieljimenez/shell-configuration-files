@@ -18,6 +18,7 @@
 .idea/tasks.xml
 .idea/dictionaries
 .idea/shelf
+.idea
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -65,4 +66,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.gitignore.io/api/macosIconIcon
+# End of https://www.gitignore.io/api/macosIcon
+
+Icon
+
