@@ -3,4 +3,5 @@ ssh/*_rsa
 ssh/*_rsa.pub
 ssh/*.pem
 ssh/devops_rsa
+ssh/config-*
 secrets

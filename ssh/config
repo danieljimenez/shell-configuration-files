@@ -1,36 +1,38 @@
+# global configuration
 IdentityFile ~/.ssh/id_rsa
-Include ~/.ssh/config.d/*
+Include ~/.ssh/config-synack
 
-# VCS repos 
+# VCS repos
 Host github.com
-    User git
-    Port 22
-    ForwardAgent no
+  User git
+  Port 22
+  ForwardAgent no
+
 Host gist.github.com
-    User git
-    Port 22
-    ForwardAgent no
-    StrictHostKeyChecking yes
+  User git
+  Port 22
+  ForwardAgent no
+
 Host bitbucket.org
-    User git
-    Port 22
-    ForwardAgent no
-    StrictHostKeyChecking yes
+  User git
+  Port 22
+  ForwardAgent no
+
 Host git.*
-    User git
-    Port 22
-    ForwardAgent no
-    StrictHostKeyChecking yes
+  User git
+  Port 22
+  ForwardAgent no
+
 Host gist.git.*
-    User git
-    Port 22
-    ForwardAgent no
-    StrictHostKeyChecking yes
+  User git
+  Port 22
+  ForwardAgent no
 
 Host chip.local
-    User chip
-    StrictHostKeyChecking no
-    RemoteForward 127.0.0.1:52698 127.0.0.1:52698
-    
+  User chip
+  StrictHostKeyChecking no
+  RemoteForward 127.0.0.1:52698 127.0.0.1:52698
+
 Host *
-    StrictHostKeyChecking no
+  StrictHostKeyChecking no
+  ForwardAgent yes
