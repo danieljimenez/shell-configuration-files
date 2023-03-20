@@ -1,6 +1,7 @@
+[include]
+    path = /Users/djimenez/.gitconfig_private
 [user]
     name = Daniel Jimenez
-    email = djimenez@synack.com
 [merge]
     tool = opendiff
 [core]
