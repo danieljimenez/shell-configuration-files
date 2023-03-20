@@ -23,6 +23,7 @@ ln -svhf $scriptdir/hgrc ~/.hgrc
 ln -svhf $scriptdir/bash_profile ~/.bash_profile
 ln -svhf $scriptdir/uncrustify-objc ~/.uncrustify-objc
 ln -svhf $scriptdir/gitconfig ~/.gitconfig
+ln -svhf $scriptdir/gitconfig_private ~/.gitconfig_private
 ln -svhf $scriptdir/gitignore_global ~/.gitignore_global
 
 # Setup link to secrets file if you have one
