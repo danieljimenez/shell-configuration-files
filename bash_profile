@@ -85,7 +85,7 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 ##############Command Completion##################
 if [ $uname == 'Darwin' ]; then
     XCODE_PATH=$(xcode-select -p)
-    BREW_PATH=$(brew --prefix)
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     
     # AWS
     if [ -f "$(which brew)" ]; then
