@@ -1,7 +1,7 @@
 [include]
     path = /Users/djimenez/.gitconfig_private
 [user]
-    name = Daniel Jimenez
+	name = danieljimenez
 [merge]
     tool = opendiff
 [core]
