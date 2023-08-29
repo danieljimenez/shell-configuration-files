@@ -60,8 +60,9 @@ if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
 
-if [ -f /usr/local/bin/subl ]; then
-    export EDITOR='/usr/local/bin/subl -w'
+if [ -f '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ]; then
+    export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+    export EDITOR='subl -w'
 fi
 
 if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then
@@ -79,8 +80,6 @@ if [ -f /usr/local/bin/docker ]; then
   dri() { docker rmi $(docker images -q); }
   dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 fi
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 ##############Command Completion##################
 if [ $uname == 'Darwin' ]; then
@@ -109,7 +108,7 @@ if [ $uname == 'Darwin' ]; then
     if [ -f ${BREW_PATH}/etc/bash_completion ]; then
         source ${BREW_PATH}/etc/bash_completion
     fi
-    
+
     # git prompt additions
     if [ -f "${XCODE_PATH}/usr/share/git-core/git-completion.bash" ]; then
         source "${XCODE_PATH}/usr/share/git-core/git-completion.bash"
