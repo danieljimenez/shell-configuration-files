@@ -31,7 +31,6 @@ if [ $uname == 'Darwin' ]; then
     alias gt='gittower $(git rev-parse --show-toplevel)'
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
     alias kg='kubectl get '
-    alias gcli='gcloud cloud-shell ssh --authorize-session'
     reveal() { open -R "${*:-.}"; }
     genpass() { curl -SsL http://www.dinopass.com/password && echo ''; }
     ssh-known-host-delete-line() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
@@ -41,14 +40,10 @@ elif [ $uname == 'Linux' ]; then
     alias ls='/bin/ls --color'
 fi
 
-if [ -f /usr/local/bin/virtualenvwrapper_lazy.sh ]; then
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
-fi
-
 ##############Environment Variables##################
-export PATH=${HOME}/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
-export HISTCONTROL=ignoreboth
+export PATH="${HOME}/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+export MANPATH="/opt/local/share/man:$MANPATH"
+export HISTCONTROL="ignoreboth"
 export HISTIGNORE="df:free:man:ls:ll:l.:reveal:gs:gl:open"
 export HISTFILESIZE=
 export HISTSIZE=
@@ -56,29 +51,27 @@ export HISTTIMEFORMAT="[%F %T] "
 export FIGNORE=".DS_Store:.git/" # files to ignore with tab completion
 export GOPATH="${HOME}/src/golang" # go workspace
 
+# Ruby stuff
 if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
 
+# Sublime Editor
 if [ -f '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ]; then
     export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
     export EDITOR='subl -w'
 fi
 
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then
-    source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
-fi
-
-if [ -f /usr/libexec/java_home ]; then
-    export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-else 
-    export JAVA_HOME='/usr/lib/jvm/jre'
-fi
-
+# Docker
 if [ -f /usr/local/bin/docker ]; then
   drm() { docker rm $(docker ps -a -q); }
   dri() { docker rmi $(docker images -q); }
   dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+fi
+
+# 1Password
+if [ -f ~/.config/op/plugins.sh ]; then
+    source ~/.config/op/plugins.sh
 fi
 
 ##############Command Completion##################
@@ -87,9 +80,9 @@ if [ $uname == 'Darwin' ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     
     # AWS
-    if [ -f "$(which brew)" ]; then
-        if [ -f ${BREW_PATH}/bin/aws_completer ]; then
-            complete -C ${BREW_PATH}/bin/aws_completer aws
+    if [ -f "/usr/local/bin/aws_completer" ]; then
+        if [ -f /usr/local/bin/aws_completer ]; then
+            complete -C /usr/local/bin/aws_completer aws
         fi
     fi
 
@@ -109,7 +102,7 @@ if [ $uname == 'Darwin' ]; then
         source ${BREW_PATH}/etc/bash_completion
     fi
 
-    # git prompt additions
+    # git prompt additions and shortcuts
     if [ -f "${XCODE_PATH}/usr/share/git-core/git-completion.bash" ]; then
         source "${XCODE_PATH}/usr/share/git-core/git-completion.bash"
         
