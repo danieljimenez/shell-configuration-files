@@ -56,11 +56,16 @@ if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
 
-# Sublime Editor
-if [ -f '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ]; then
-    export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-    export EDITOR='subl -w'
+# CotEditor
+if [ -f '/usr/local/bin/cot' ]; then
+    export EDITOR='cot -w'
 fi
+
+# # Sublime Editor
+# if [ -f '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ]; then
+#     export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+#     export EDITOR='subl -w'
+# fi
 
 # Docker
 if [ -f /usr/local/bin/docker ]; then
