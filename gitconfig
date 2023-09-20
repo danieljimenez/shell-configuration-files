@@ -1,11 +1,11 @@
 [include]
-    path = /Users/djimenez/.gitconfig_private
+    path = ~/.gitconfig_private
 [user]
-	name = danieljimenez
+	name = Daniel Jimenez
 [merge]
     tool = opendiff
 [core]
-    excludesfile = /Users/djimenez/.gitignore_global
+    excludesfile = ~/.gitignore_global
     quotepath = false
     autocrlf = input
 [difftool "sourcetree"]
@@ -18,10 +18,6 @@
     keepBackup = false
 [push]
     default = current
-[filter "hawser"]
-    clean = git hawser clean %f
-    smudge = git hawser smudge %f
-    required = true
 [filter "lfs"]
     clean = git lfs clean %f
     smudge = git lfs smudge %f
