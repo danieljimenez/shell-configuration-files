@@ -1,4 +1,3 @@
-IdentityFile ~/.ssh/id_rsa
 Include ~/.ssh/config.d/*
 
 # VCS repos 
