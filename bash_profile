@@ -101,10 +101,6 @@ if [ $uname == 'Darwin' ]; then
         source "$HOME/.rvm/scripts/rvm"
     fi
 
-    # bash completion
-    # Large impact on shell open time.
-    if [ -f ${BREW_PATH}/etc/bash_completion ]; then
-        source ${BREW_PATH}/etc/bash_completion
     fi
 
     # git prompt additions and shortcuts
