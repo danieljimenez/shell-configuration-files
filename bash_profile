@@ -67,6 +67,11 @@ fi
 #     export EDITOR='subl -w'
 # fi
 
+# Jetbrains Editor (idea)
+if [ -d ~/Library/Application\ Support/JetBrains/Toolbox/scripts ]; then
+    export PATH="~/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+fi
+
 # Docker
 if [ -f /usr/local/bin/docker ]; then
   drm() { docker rm $(docker ps -a -q); }
