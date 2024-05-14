@@ -101,6 +101,9 @@ if [ $uname == 'Darwin' ]; then
         source "$HOME/.rvm/scripts/rvm"
     fi
 
+    # kubectl completion
+    if [ -f ${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl ]; then
+        source ${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl
     fi
 
     # git prompt additions and shortcuts
