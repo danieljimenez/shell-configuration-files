@@ -8,6 +8,7 @@
     excludesfile = ~/.gitignore_global
     quotepath = false
     autocrlf = input
+	editor = cot --wait
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -50,3 +51,5 @@
     template = /Users/djimenez/.stCommitMsg
 [pull]
 	ff = only
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
