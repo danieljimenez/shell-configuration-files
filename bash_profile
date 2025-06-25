@@ -28,9 +28,9 @@ if [ $uname == 'Darwin' ]; then
     alias xed='/usr/bin/xed -xc'
     alias rmate='/usr/local/bin/mate'
     alias hb='hub browse'
-    alias gt='gittower $(git rev-parse --show-toplevel)'
     alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
-    alias kg='kubectl get '
+    alias k='kubectl '
+    alias ktail='kubectl get events --sort-by='.lastTimestamp' --watch'
     reveal() { open -R "${*:-.}"; }
     genpass() { curl -SsL http://www.dinopass.com/password && echo ''; }
     ssh-known-host-delete-line() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
@@ -96,69 +96,62 @@ if [ $uname == 'Darwin' ]; then
         fi
     fi
 
-    # GCloud
-    if [ -f '/usr/local/google-cloud-sdk/completion.bash.inc' ]; then
-        source '/usr/local/google-cloud-sdk/completion.bash.inc'
-    fi
-
-    # RVM
-    if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
-        source "$HOME/.rvm/scripts/rvm"
-    fi
-
-    # kubectl completion
-    if [ -f ${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl ]; then
-        source ${HOMEBREW_PREFIX}/etc/bash_completion.d/kubectl
+    # kubectl prompt additions and shortcuts
+    if [ -f "/opt/homebrew/bin/kubectl" ]; then
+        source <(kubectl completion bash)
     fi
 
     # git prompt additions and shortcuts
     if [ -f "${XCODE_PATH}/usr/share/git-core/git-completion.bash" ]; then
         source "${XCODE_PATH}/usr/share/git-core/git-completion.bash"
-        
+
         # These are command completion mappings for the above images.
         alias g='git'
         __git_complete g __git_main
-        
+
         alias ga='git add'
         __git_complete ga _git_add
-        
+
         alias gb='git branch'
         __git_complete gb _git_branch
-        
+
         alias gd='git diff'
         __git_complete gd _git_diff
-        
+
         alias gc='git commit'
         __git_complete gc _git_commit
-        
+
         alias gl='git log --name-status'
         __git_complete gl _git_log
-        
+
         alias gr='git reset'
         __git_complete gr _git_reset
 
         alias gfp='git fetch --prune --all && git pull'
         alias gf='git fetch --prune --all'
         __git_complete gf _git_fetch
-        
+
         alias gco='git checkout'
         __git_complete gco _git_checkout
-        
+
         alias gsu='git submodule update --init --recursive'
         __git_complete gsu _git_submodule update
-    
+
         alias gsf='git submodule foreach --recursive'
         __git_complete gsu _git_submodule foreach
-        
+
+        alias gt='git tag'
+        __git_complete gt _git_tag foreach
+
         #These don't work bc of an off by one error in the git-complete code
         # alias gpull='git pull'
         # __git_complete gpull _git_pull
         #
         # alias gpush='git push'
         # __git_complete gpush _git_push
-        
+
         alias gs='git status --branch'
     fi
-    
+
 fi
 
