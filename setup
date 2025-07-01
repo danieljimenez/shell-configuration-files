@@ -17,14 +17,16 @@ scriptdir="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 
 # Create the symbolic links (essentially this is the setup)
-ln -svhf $scriptdir/ssh ~/.ssh
-ln -svhf $scriptdir/inputrc ~/.inputrc
-ln -svhf $scriptdir/hgrc ~/.hgrc
-ln -svhf $scriptdir/bash_profile ~/.bash_profile
-ln -svhf $scriptdir/uncrustify-objc ~/.uncrustify-objc
-ln -svhf $scriptdir/gitconfig ~/.gitconfig
-ln -svhf $scriptdir/gitconfig_private ~/.gitconfig_private
-ln -svhf $scriptdir/gitignore_global ~/.gitignore_global
+ln -svf $scriptdir/ssh ~/.ssh
+ln -svf $scriptdir/inputrc ~/.inputrc
+ln -svf $scriptdir/hgrc ~/.hgrc
+ln -svf $scriptdir/bash_profile ~/.bash_profile
+ln -svf $scriptdir/uncrustify-objc ~/.uncrustify-objc
+ln -svf $scriptdir/gitconfig ~/.gitconfig
+ln -svf $scriptdir/gitconfig_private ~/.gitconfig_private
+ln -svf $scriptdir/gitignore_global ~/.gitignore_global
+ln -svf $scriptdir/starship.toml ~/.config/starship.toml
+ln -svf $scriptdir/bashrc ~/.bashrc
 
 # Setup link to secrets file if you have one
 [ -f $scriptdir/secrets ] && ln -svhf $scriptdir/secrets ~/.secrets

@@ -1,0 +1,31 @@
+format = """
+$git_branch \
+$directory \
+$character"""
+add_newline = false
+
+[directory]
+format = "[$path]($style)"
+
+[git_branch]
+format = ' \[[$symbol$branch]($style)\]'
+
+[kubernetes]
+symbol = "⛵ "
+format = '\[[$symbol$context]($style)\]'
+disabled = false
+style = "green"
+
+[[kubernetes.contexts]]
+context_pattern = ".*staging.*"
+style = "yellow"
+
+[[kubernetes.contexts]]
+context_pattern = ".*production.*"
+style = "red"
+
+[[kubernetes.contexts]]
+context_pattern = 'arn:aws:eks:[^:]+:[^:]+:cluster/(?P<cluster>[\w-]+)'
+context_alias = '$cluster'
+
+
