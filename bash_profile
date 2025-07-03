@@ -89,17 +89,22 @@ if [ $uname == 'Darwin' ]; then
     XCODE_PATH=$(xcode-select -p)
     eval "$(/opt/homebrew/bin/brew shellenv)"
     
-    # AWS
-    if [ -f "/usr/local/bin/aws_completer" ]; then
-        if [ -f /usr/local/bin/aws_completer ]; then
-            complete -C /usr/local/bin/aws_completer aws
-        fi
+    if type brew &>/dev/null
+    then
+      HOMEBREW_PREFIX="$(brew --prefix)"
+      if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
+      then
+        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+      else
+        for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
+        do
+          [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+        done
+      fi
     fi
 
-    # kubectl prompt additions and shortcuts
-    if [ -f "/opt/homebrew/bin/kubectl" ]; then
-        source <(kubectl completion bash)
-    fi
+    alias k=kubectl
+    complete -F __start_kubectl k
 
     # git prompt additions and shortcuts
     if [ -f "${XCODE_PATH}/usr/share/git-core/git-completion.bash" ]; then
