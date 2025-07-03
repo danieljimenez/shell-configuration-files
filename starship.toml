@@ -1,31 +1,118 @@
-format = """
-$git_branch \
-$directory \
-$character"""
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
 add_newline = false
 
-[directory]
-format = "[$path]($style)"
 
-[git_branch]
-format = ' \[[$symbol$branch]($style)\]'
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$mise\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$netns\
+$shell\
+$directory$character"""
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[aws]
+disabled = true
 
 [kubernetes]
-symbol = "⛵ "
-format = '\[[$symbol$context]($style)\]'
+format = '[$symbol$context( \($namespace\))]($style) '
 disabled = false
-style = "green"
 
 [[kubernetes.contexts]]
 context_pattern = ".*staging.*"
-style = "yellow"
+style = "green"
 
 [[kubernetes.contexts]]
 context_pattern = ".*production.*"
 style = "red"
-
-[[kubernetes.contexts]]
-context_pattern = 'arn:aws:eks:[^:]+:[^:]+:cluster/(?P<cluster>[\w-]+)'
-context_alias = '$cluster'
-
-
