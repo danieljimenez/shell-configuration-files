@@ -156,6 +156,7 @@ if [ $uname == 'Darwin' ]; then
         # __git_complete gpush _git_push
 
         alias gs='git status --branch'
+
     fi
 
 fi
