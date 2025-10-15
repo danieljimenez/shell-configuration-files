@@ -4,7 +4,6 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-
 format = """
 $username\
 $hostname\
@@ -41,7 +40,6 @@ $guix_shell\
 $haskell\
 $haxe\
 $helm\
-$java\
 $julia\
 $kotlin\
 $gradle\

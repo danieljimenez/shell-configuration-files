@@ -32,7 +32,7 @@ if [ $uname == 'Darwin' ]; then
     alias k='kubectl '
     alias ktail='kubectl get events --sort-by='.lastTimestamp' --watch'
     reveal() { open -R "${*:-.}"; }
-    genpass() { curl -SsL http://www.dinopass.com/password && echo ''; }
+    genpass() { curl -kSsL http://www.dinopass.com/password && echo ''; }
     ssh-known-host-delete-line() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
 elif [ $uname == 'Linux' ]; then
     alias l.='ls -ld --color'
@@ -51,21 +51,13 @@ export HISTTIMEFORMAT="[%F %T] "
 export FIGNORE=".DS_Store:.git/" # files to ignore with tab completion
 export GOPATH="${HOME}/src/golang" # go workspace
 
-# Ruby stuff
-if [ -f  "$HOME/.rvm/scripts/rvm" ]; then
-    source "$HOME/.rvm/scripts/rvm"
-fi
+# allows for multiple kube config files
+export KUBECONFIG="$HOME/.kube/config:$(printf "%s" "$HOME/.kube"/conf.d/*.yaml | tr ' ' ':')"
 
 # CotEditor
 if [ -f '/usr/local/bin/cot' ]; then
     export EDITOR='cot -w'
 fi
-
-# # Sublime Editor
-# if [ -f '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' ]; then
-#     export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-#     export EDITOR='subl -w'
-# fi
 
 # Jetbrains Editor (idea)
 if [ -d ~/Library/Application\ Support/JetBrains/Toolbox/scripts ]; then
@@ -79,14 +71,15 @@ if [ -f /usr/local/bin/docker ]; then
   dbash() { docker exec -it $(docker ps -aqf "name=$1") bash; }
 fi
 
-# 1Password
-if [ -f ~/.config/op/plugins.sh ]; then
-    source ~/.config/op/plugins.sh
-fi
+## 1Password
+#if [ -f ~/.config/op/plugins.sh ]; then
+#    source ~/.config/op/plugins.sh
+#fi
 
 ##############Command Completion##################
 if [ $uname == 'Darwin' ]; then
     XCODE_PATH=$(xcode-select -p)
+    eval "$(starship init bash)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
     
     if type brew &>/dev/null
