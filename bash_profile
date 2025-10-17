@@ -57,7 +57,7 @@ export FIGNORE=".DS_Store:.git/" # files to ignore with tab completion
 export GOPATH="${HOME}/src/golang" # go workspace
 
 # allows for multiple kube config files
-export KUBECONFIG="$HOME/.kube/config:$(printf "%s " "$HOME/.kube"/conf.d/*.yaml | tr ' ' ':')"
+export KUBECONFIG="$(printf "%s " "$HOME/.kube"/conf.d/*.yaml | tr ' ' ':'):$HOME/.kube/config"
 
 # CotEditor
 if [ -f '/usr/local/bin/cot' ]; then
