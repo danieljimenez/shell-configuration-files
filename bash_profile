@@ -28,12 +28,17 @@ if [ $uname == 'Darwin' ]; then
     alias xed='/usr/bin/xed -xc'
     alias rmate='/usr/local/bin/mate'
     alias hb='hub browse'
-    alias gtl='cd $(git rev-parse --show-toplevel)' # Sneak to the top of the git repo
+    # git top level, sneak to the top of the git repo
+    alias gtl='cd $(git rev-parse --show-toplevel)'
     alias k='kubectl '
     alias ktail='kubectl get events --sort-by='.lastTimestamp' --watch'
+
+    # show file in finder
     reveal() { open -R "${*:-.}"; }
+    # generate a fun temporary password
     genpass() { curl -kSsL http://www.dinopass.com/password && echo ''; }
-    ssh-known-host-delete-line() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
+    # remove a line from the ssh known_hosts file
+    rmknownhost() { sed -i.bak -e "$1d" ${HOME}/.ssh/known_hosts; }
 elif [ $uname == 'Linux' ]; then
     alias l.='ls -ld --color'
     alias ll='/bin/ls -lshG --color'
@@ -52,7 +57,7 @@ export FIGNORE=".DS_Store:.git/" # files to ignore with tab completion
 export GOPATH="${HOME}/src/golang" # go workspace
 
 # allows for multiple kube config files
-export KUBECONFIG="$HOME/.kube/config:$(printf "%s" "$HOME/.kube"/conf.d/*.yaml | tr ' ' ':')"
+export KUBECONFIG="$HOME/.kube/config:$(printf "%s " "$HOME/.kube"/conf.d/*.yaml | tr ' ' ':')"
 
 # CotEditor
 if [ -f '/usr/local/bin/cot' ]; then
