@@ -53,3 +53,5 @@
 	ff = only
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com/
+[init]
+	defaultBranch = main
