@@ -50,9 +50,12 @@ export PATH="${HOME}/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:
 export MANPATH="/opt/local/share/man:$MANPATH"
 export HISTCONTROL="ignoreboth"
 export HISTIGNORE="df:free:man:ls:ll:l.:reveal:gs:gl:open"
-export HISTFILESIZE=
-export HISTSIZE=
+export HISTSIZE=100000
+export HISTFILESIZE=200000
 export HISTTIMEFORMAT="[%F %T] "
+
+shopt -s histappend
+PROMPT_COMMAND="history -a${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 export FIGNORE=".DS_Store:.git/" # files to ignore with tab completion
 export GOPATH="${HOME}/src/golang" # go workspace
 
