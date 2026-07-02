@@ -5,6 +5,8 @@ ssh/*_rsa
 ssh/*_rsa.pub
 ssh/*.pem
 ssh/*_ed25519
+ssh/*.pub
+ssh/*_tenant
 ssh/devops_rsa
 ssh/config-*
 gitconfig_private
