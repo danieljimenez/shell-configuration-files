@@ -162,3 +162,25 @@ if [ $uname == 'Darwin' ]; then
 
 fi
 
+
+##############Prompt##################
+# Single-line prompt: ~/dir (git-branch *+%) ❯
+# Kept to one line so it stays out of the way in copy/paste and tool terminals.
+for GIT_PROMPT in "${HOMEBREW_PREFIX}/etc/bash_completion.d/git-prompt.sh" \
+                  "${XCODE_PATH}/usr/share/git-core/git-prompt.sh"; do
+    if ! type __git_ps1 &>/dev/null && [ -r "${GIT_PROMPT}" ]; then
+        source "${GIT_PROMPT}"
+    fi
+done
+export GIT_PS1_SHOWDIRTYSTATE=1 GIT_PS1_SHOWUNTRACKEDFILES=1 GIT_PS1_SHOWSTASHSTATE=1 GIT_PS1_SHOWUPSTREAM=auto
+export PROMPT_DIRTRIM=3
+
+__set_prompt() {
+    local status=$?
+    local arrow='\[\e[35m\]❯\[\e[0m\]'
+    [ ${status} -ne 0 ] && arrow='\[\e[31m\]❯\[\e[0m\]'
+    PS1="\[\e[1;34m\]\w\[\e[0m\]"
+    type __git_ps1 &>/dev/null && PS1+="$(__git_ps1 ' \[\e[33m\](%s)\[\e[0m\]')"
+    PS1+=" ${arrow} "
+}
+PROMPT_COMMAND="__set_prompt${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
