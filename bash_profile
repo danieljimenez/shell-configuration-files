@@ -87,7 +87,7 @@ fi
 ##############Command Completion##################
 if [ $uname == 'Darwin' ]; then
     XCODE_PATH=$(xcode-select -p)
-    eval "$(starship init bash)"
+    #eval "$(starship init bash)"
     eval "$(/opt/homebrew/bin/brew shellenv)"
     
     if type brew &>/dev/null
