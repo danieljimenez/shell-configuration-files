@@ -46,7 +46,7 @@ elif [ $uname == 'Linux' ]; then
 fi
 
 ##############Environment Variables##################
-export PATH="${HOME}/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="${HOME}/Applications:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
 export HISTCONTROL="ignoreboth"
 export HISTIGNORE="df:free:man:ls:ll:l.:reveal:gs:gl:open"
